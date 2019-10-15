@@ -59,6 +59,7 @@ ORDER BY 2,1,3;`
 Les couples de marques de même nom et de même classe dans des pays différents et avec des propriétaires différents.
 
 Les entêtes de colonnes seront :
+
 	- nom (commun aux deux marques)
 	- classe (commune aux deux marques)
 	- pays_1 (code du pays de la première marque)
@@ -84,6 +85,7 @@ ORDER BY 1,2,3,4,5;`
 Trouver, si elles existent, les marques qui ne respectent pas la contrainte : `Le pays d'une marque doit être le même que celui de son propriétaire`.
 
 Colonnes à afficher :
+
 	- nom de la marque
 	- classe  de la marque
 	- paysM de la marque
@@ -219,6 +221,7 @@ Les sociétés qui sont propriètaires d'au moins une marque, avec le nombre de 
 Les sociétés seront classées par ordre alphabétique sur leur nom.
 
 Entêtes des colonnes attendus :
+
 	- nom
 	- pays
 	- "Nombre de Marques"
@@ -238,6 +241,7 @@ ORDER BY societe.nom;`
 Les sociétés qui ne possèdent aucune marque.
 
 Entêtes de colonne :
+
 	- nom 
 	- pays
 
@@ -258,6 +262,7 @@ ORDER BY 2,1;`
 Trouver si elles existent les ventes qui ne respectent pas la contrainte : `Le vendeur doit être l'acquereur de la vente precedente.`
 
 On affichera :
+
     - l'identifiant de l'acquereur de la vente precedente
     - l'identifiant du vendeur
     - l'identifiant de la marque
@@ -315,6 +320,7 @@ Afficher pour chaque  classe , et chaque  propriétaire le nombre de marque poss
 le propriétaire dans la classe.
 
 Entête des colonnes du résultat attendu :
+
     - classe
     - prop
     - NB
@@ -332,6 +338,7 @@ ORDER BY classe;`
 
 Afficher pour chaque classe, le ou les propriétaires possédant le plus grand nombre  de marques.
 Pour cela, créer d'abord une vue qui "nomme", le résultat de la requête de la question précédente , puis écrire une requête dont l'entete des colonnes du resultat est :
+
     - classe
     - NB
     - nom
