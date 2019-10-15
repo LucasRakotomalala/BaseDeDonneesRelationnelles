@@ -59,13 +59,12 @@ ORDER BY 2,1,3;`
 Les couples de marques de même nom et de même classe dans des pays différents et avec des propriétaires différents.
 
 Les entêtes de colonnes seront :
-
-	- nom (commun aux deux marques)
-	- classe (commune aux deux marques)
-	- pays_1 (code du pays de la première marque)
-	- prop_1 (identifiant du propriétaire de la première marque)
-	- pays_2 (code du pays de la deuxième marque)
-	- prop_2 (identifiant du propriétaire de la deuxième marque)
+- nom (commun aux deux marques)
+- classe (commune aux deux marques)
+- pays_1 (code du pays de la première marque)
+- prop_1 (identifiant du propriétaire de la première marque)
+- pays_2 (code du pays de la deuxième marque)
+- prop_2 (identifiant du propriétaire de la deuxième marque)
 
 Ordonner les résultats par nom, classe, pays_1, prop_1, pays_2, prop_2.
 
@@ -85,11 +84,10 @@ ORDER BY 1,2,3,4,5;`
 Trouver, si elles existent, les marques qui ne respectent pas la contrainte : `Le pays d'une marque doit être le même que celui de son propriétaire`.
 
 Colonnes à afficher :
-
-	- nom de la marque
-	- classe  de la marque
-	- paysM de la marque
-	- paysS de la societe
+- nom de la marque
+- classe  de la marque
+- paysM de la marque
+- paysS de la societe
 
 Ordonner par nom, classe, PaysM, PaysS.
 
@@ -221,10 +219,9 @@ Les sociétés qui sont propriètaires d'au moins une marque, avec le nombre de 
 Les sociétés seront classées par ordre alphabétique sur leur nom.
 
 Entêtes des colonnes attendus :
-
-	- nom
-	- pays
-	- "Nombre de Marques"
+- nom
+- pays
+- "Nombre de Marques"
 
 `SELECT
 	societe.nom,
@@ -241,9 +238,8 @@ ORDER BY societe.nom;`
 Les sociétés qui ne possèdent aucune marque.
 
 Entêtes de colonne :
-
-	- nom 
-	- pays
+- nom 
+- pays
 
 Classer les réponses par pays puis par nom de société.
 
@@ -262,11 +258,10 @@ ORDER BY 2,1;`
 Trouver si elles existent les ventes qui ne respectent pas la contrainte : `Le vendeur doit être l'acquereur de la vente precedente.`
 
 On affichera :
-
-    - l'identifiant de l'acquereur de la vente precedente
-    - l'identifiant du vendeur
-    - l'identifiant de la marque
-    - la date de la vente
+- l'identifiant de l'acquereur de la vente precedente
+- l'identifiant du vendeur
+- l'identifiant de la marque
+- la date de la vente
 
 Les lignes seront classées selon les identifiants de marque puis les dates.
 
@@ -320,10 +315,9 @@ Afficher pour chaque  classe , et chaque  propriétaire le nombre de marque poss
 le propriétaire dans la classe.
 
 Entête des colonnes du résultat attendu :
-
-    - classe
-    - prop
-    - NB
+- classe
+- prop
+- NB
 
 Ordonner par classe, prop
 
@@ -338,11 +332,10 @@ ORDER BY classe;`
 
 Afficher pour chaque classe, le ou les propriétaires possédant le plus grand nombre  de marques.
 Pour cela, créer d'abord une vue qui "nomme", le résultat de la requête de la question précédente , puis écrire une requête dont l'entete des colonnes du resultat est :
-
-    - classe
-    - NB
-    - nom
-    - pays
+- classe
+- NB
+- nom
+- pays
 
 Ordonner par classe.
 
@@ -360,7 +353,7 @@ S.nom,
 S.pays
 FROM NBM_proprio AS NBM1
 JOIN societe S
-ON S.id=NBM1.prop
+ON S.id = NBM1.prop
 WHERE NBM1.NB = (
             SELECT MAX(NBM2.NB)
              FROM NBM_proprio AS NBM2 WHERE NBM2.classe = NBM1.classe)
