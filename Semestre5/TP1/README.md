@@ -1,10 +1,14 @@
 # Bases de donnees relationnelles
 ## TP1 - Interrogation de données (SQL)
 
+-----------------
+
 ### Question 1 :
 Tout sur les pays
 `SELECT *
 FROM pays;`
+
+-----------------
 
 ### Question 2 :
 Pareil mais ordonné sur les `noms`.
@@ -13,6 +17,7 @@ Pareil mais ordonné sur les `noms`.
 FROM pays
 ORDER BY nom;`
 
+-----------------
 
 ### Question 3 :
 Toutes les marques ordonnées par nom, classe, pays.
@@ -20,6 +25,8 @@ Toutes les marques ordonnées par nom, classe, pays.
 `SELECT marque.nom, marque.classe, marque.pays
 FROM marque
 ORDER BY 3,2,1;`
+
+-----------------
 
 ### Question 4 :
 Afficher les propriétaires associés aux marques qu'ils possèdent.
@@ -34,6 +41,8 @@ Afficher les propriétaires associés aux marques qu'ils possèdent.
 JOIN societe ON marque.prop = societe.id
 ORDER BY societe.id, marque.id;`
 
+-----------------
+
 ### Question 5 :
 On cherche a détecter une information incohérente en affichant les marques vendues avant leur enregistrement. Les réponses seront ordonnées par classe, puis par nom puis par pays. Les colonnes restent dans l'ordre nom, pays , classe.
 
@@ -42,6 +51,8 @@ FROM (marque JOIN enr ON marque.id = enr.marque)
 JOIN vente ON enr.marque = vente.marque
 WHERE vente.date_vente < enr.date_enr
 ORDER BY 3,1,2;`
+
+-----------------
 
 ### Question 6 :
 Nom, pays et classe des marques non enregistrées, classées par pays, nom et classe.
@@ -54,6 +65,7 @@ FROM marque
 INNER JOIN enr ON marque.id = enr.marque
 ORDER BY 2,1,3;`
 
+-----------------
 
 ### Question 7 :
 Les couples de marques de même nom et de même classe dans des pays différents et avec des propriétaires différents.
@@ -79,6 +91,8 @@ INNER JOIN marque AS m2 ON m1.nom = m2.nom AND m1.classe = m2.classe
 WHERE m1.pays < m2.pays AND m1.prop <> m2.prop
 ORDER BY 1,2,3,4,5;`
 
+-----------------
+
 ### Question 8 :
 
 Trouver, si elles existent, les marques qui ne respectent pas la contrainte : `Le pays d'une marque doit être le même que celui de son propriétaire`.
@@ -99,6 +113,8 @@ JOIN societe ON marque.prop = societe.id
 WHERE marque.pays <> societe.pays
 ORDER BY 1,2,3;`
 
+-----------------
+
 ### Question 9 :
 
 Donner, si elles existent, les marques qui violent la contrainte suivante : `Le pays d'enregistrement d'une marque doit être le pays de la marque`.
@@ -112,6 +128,8 @@ Donner, si elles existent, les marques qui violent la contrainte suivante : `Le 
 WHERE marque.pays <> enr.pays
 ORDER BY 1,2,3;`
 
+-----------------
+
 ### Question 10 :
 
 Les sociétés qui possèdent des marques qui ne sont pas toutes enregistrées, classées par nom puis par pays.
@@ -121,6 +139,8 @@ FROM societe JOIN marque ON societe.id = marque.prop
 WHERE marque.id NOT IN (SELECT enr.marque
 FROM enr)
 ORDER BY 1,2;`
+
+-----------------
 
 ### Question 11 :
 
@@ -141,6 +161,8 @@ societe.id NOT IN
      FROM enr)
     )
 ORDER BY 1,2;`
+
+-----------------
 
 ### Question 12 :
 
@@ -188,6 +210,7 @@ AND
 ORDER BY V.marque;`
 
 
+-----------------
 
 ### Question 13 :
 
@@ -199,6 +222,8 @@ La colonne qui contient le nombre de marques devra s'appeler "Nombre de Marques"
 FROM marque
 GROUP BY classe
 ORDER BY classe desc;`
+
+-----------------
 
 ### Question 14 :
 Pour chaque classe (identifiée par son numéro) le nombre de pays dans lesquels il y a au moins une marque de la classe.
@@ -232,6 +257,7 @@ JOIN societe ON marque.prop = societe.id
 GROUP BY societe.id, societe.nom, societe.pays
 ORDER BY societe.nom;`
 
+-----------------
 
 ### Question 16 :
 
@@ -251,7 +277,7 @@ FROM marque
 JOIN societe ON marque.prop = societe.id
 ORDER BY 2,1;`
 
-
+-----------------
 
 ### Question 17 :
 
@@ -309,6 +335,8 @@ WHERE
     VPred.acquereur <> V.vendeur
 ORDER BY V.marque, V.date_vente;`
 
+-----------------
+
 ### Question 18 :
 
 Afficher pour chaque  classe , et chaque  propriétaire le nombre de marque possédé par
@@ -327,6 +355,8 @@ Ordonner par classe, prop
 FROM marque
 GROUP BY classe, prop
 ORDER BY classe;`
+
+-----------------
 
 ### Question 19 :
 
