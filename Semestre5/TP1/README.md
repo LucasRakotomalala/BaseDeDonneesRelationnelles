@@ -3,56 +3,56 @@
 
 ### Question 1 :
 Tout sur les pays
-`select *
-from pays;`
+`SELECT *
+FROM pays;`
 
 ### Question 2 :
 Pareil mais ordonné sur les `noms`.
 
-`select *
-from pays
-order by nom ;`
+`SELECT *
+FROM pays
+ORDER BY nom;`
 
 
 ### Question 3 :
 Toutes les marques ordonnées par nom, classe, pays.
 
-`select marque.nom, marque.classe, marque.pays
-from marque
-order by 3,2,1;`
+`SELECT marque.nom, marque.classe, marque.pays
+FROM marque
+ORDER BY 3,2,1;`
 
 ### Question 4 :
 Afficher les propriétaires associés aux marques qu'ils possèdent.
 
-`select
+`SELECT
 	societe.nom as NomSociete,
     societe.pays as PaysSociete,
     marque.nom as NomMarque,
     marque.pays as PaysMarque,
     marque.classe as ClasseMarque
-from marque
-join societe on marque.prop = societe.id
-order by societe.id, marque.id;`
+    FROM marque
+JOIN societe ON marque.prop = societe.id
+ORDER BY societe.id, marque.id;`
 
 ### Question 5 :
 On cherche a détecter une information incohérente en affichant les marques vendues avant leur enregistrement. Les réponses seront ordonnées par classe, puis par nom puis par pays. Les colonnes restent dans l'ordre nom, pays , classe.
 
-`select distinct marque.nom,  marque.pays, marque.classe
-from (marque join enr on marque.id = enr.marque)
-join vente on enr.marque = vente.marque
-where vente.date_vente < enr.date_enr
-order by 3,1,2;`
+`SELECT distinct marque.nom,  marque.pays, marque.classe
+FROM (marque JOIN enr ON marque.id = enr.marque)
+JOIN vente ON enr.marque = vente.marque
+WHERE vente.date_vente < enr.date_enr
+ORDER BY 3,1,2;`
 
 ### Question 6 :
 Nom, pays et classe des marques non enregistrées, classées par pays, nom et classe.
 
-`select marque.nom, marque.pays, marque.classe
-from marque
-except
-select marque.nom, marque.pays, marque.classe
-from marque inner join enr
-on marque.id = enr.marque
-order by 2,1,3;`
+`SELECT marque.nom, marque.pays, marque.classe
+FROM marque
+EXCEPT
+SELECT marque.nom, marque.pays, marque.classe
+FROM marque
+INNER JOIN enr ON marque.id = enr.marque
+ORDER BY 2,1,3;`
 
 
 ### Question 7 :
@@ -68,16 +68,16 @@ Les entetes de colonnes seront :
 
 Ordonner les résultats par nom, classe, pays_1,prop_1,pays_2, prop_2.
 
-`select m1.nom as nom,
+`SELECT m1.nom as nom,
 	m1.classe as classe,
 	m1.pays as pays_1,
 	m1.prop as prop_1,
 	m2.pays as pays_2,
 	m2.prop as prop_2
-from marque as m1
-inner join marque as m2 on m1.nom = m2.nom and m1.classe = m2.classe
-where m1.pays < m2.pays and m1.prop <> m2.prop
-order by 1,2,3,4,5;`
+	FROM marque as m1
+INNER JOIN marque as m2 ON m1.nom = m2.nom and m1.classe = m2.classe
+WHERE m1.pays < m2.pays and m1.prop <> m2.prop
+ORDER BY 1,2,3,4,5;`
 
 ### Question 8 :
 
@@ -91,35 +91,37 @@ Colonnes à afficher :
 
 Ordonner par nom, classe , PaysM,  PaysS.
 
-`select marque.nom, marque.classe,
+`SELECT marque.nom, marque.classe,
 	marque.pays as paysM,
 	societe.pays as paysS
-from marque join societe on marque.prop = societe.id
-where marque.pays <> societe.pays
-order by 1,2,3;`
+FROM marque
+JOIN societe ON marque.prop = societe.id
+WHERE marque.pays <> societe.pays
+ORDER BY 1,2,3;`
 
 ### Question 9 :
 
 Donnez si elles existent les marques qui violent la contrainte suivante:
 Le pays d'enregistrement d'une marque doit être le pays de la marque.
 
-`select
+`SELECT
 	marque.nom as nom,
 	marque.classe as classe,
 	marque.pays as paysMarque,
 	enr.pays as paysEnr
-from marque join enr on marque.id = enr.marque
-where marque.pays <> enr.pays
-order by 1,2,3;`
+	FROM marque JOIN enr ON marque.id = enr.marque
+WHERE marque.pays <> enr.pays
+ORDER BY 1,2,3;`
 
 ### Question 10 :
 
 Les sociétés qui possèdent des marques qui ne sont pas toutes enregistrées, classées par nom puis par pays.
 
-`select distinct societe.nom, societe.pays
-from societe join marque on societe.id = marque.prop
-where marque.id not in (select enr.marque from enr)
-order by 1,2;`
+`SELECT distinct societe.nom, societe.pays
+FROM societe JOIN marque ON societe.id = marque.prop
+WHERE marque.id NOT IN (SELECT enr.marque
+FROM enr)
+ORDER BY 1,2;`
 
 ### Question 11 :
 
@@ -129,16 +131,18 @@ Un propriétaire est une société qui possède au moins une marque
 
 Les entêtes de colonnes doivent être nom et pays et l'ordre se fait sur nom puis pays.
 
-`select distinct societe.nom, societe.pays
-from societe join marque on societe.id = marque.prop
-where marque.id in (select enr.marque from enr)
+`SELECT distinct societe.nom, societe.pays
+FROM societe JOIN marque ON societe.id = marque.prop
+WHERE marque.id IN (SELECT enr.marque
+FROM enr)
 and
-societe.id not in
-    (select societe.id
-     from societe join marque on societe.id = marque.prop
-     where marque.id not in (select enr.marque from enr)
+societe.id NOT IN
+    (SELECT societe.id
+    FROM societe JOIN marque ON societe.id = marque.prop
+     WHERE marque.id NOT IN (SELECT enr.marque
+     FROM enr)
     )
-order by 1,2;`
+ORDER BY 1,2;`
 
 ### Question 12 :
 
@@ -163,7 +167,7 @@ WHERE
     V1.date_vente < V.date_vente
     ) 
 AND
-    -- on suppose qu'il n'y a qu'un dépot par marque,
+    -- ON suppose qu'il n'y a qu'un dépot par marque,
     -- donc E1 est l'unique dépot de la marque vendue par V
     E1.deposant <> V.vendeur
 ORDER BY V.marque;`
@@ -184,7 +188,7 @@ WHERE
     WHERE  V1.marque=V.marque
     ) 
 AND
-    -- on suppose qu'il n'y a qu'un dépot par marque,
+    -- ON suppose qu'il n'y a qu'un dépot par marque,
     -- donc E1 est l'unique dépot de la marque vendue par V
     E1.deposant <> V.vendeur
 ORDER BY V.marque;`
