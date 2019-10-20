@@ -99,7 +99,7 @@ Trouver, si elles existent, les marques qui ne respectent pas la contrainte : `L
 
 Colonnes à afficher :
 - nom de la marque
-- classe  de la marque
+- classe de la marque
 - paysM de la marque
 - paysS de la societe
 
@@ -201,7 +201,7 @@ JOIN enr E1 ON V.marque = E1.marque
 WHERE    
     -- V est la première vente : il n'existe pas de vente antérieure --
     V.date_vente =
-    (SELECT Min(V1.date_vente) FROM vente  V1
+    (SELECT Min(V1.date_vente) FROM vente V1
     WHERE V1.marque=V.marque
     ) 
 AND
@@ -304,7 +304,7 @@ WHERE
     AND
     -- VPred est la vente précédant immédiatement V --
     NOT EXISTS
-    (SELECT * FROM  vente  V1
+    (SELECT * FROM vente V1
     WHERE
 		V1.marque = V.marque
 		AND V1.date_vente < V.date_vente
@@ -339,7 +339,7 @@ ORDER BY V.marque, V.date_vente;`
 
 ### Question 18 :
 
-Afficher pour chaque  classe , et chaque  propriétaire le nombre de marque possédé par
+Afficher pour chaque classe , et chaque propriétaire le nombre de marque possédé par
 le propriétaire dans la classe.
 
 Entête des colonnes du résultat attendu :
@@ -360,7 +360,7 @@ ORDER BY classe;`
 
 ### Question 19 :
 
-Afficher pour chaque classe, le ou les propriétaires possédant le plus grand nombre  de marques.
+Afficher pour chaque classe, le ou les propriétaires possédant le plus grand nombre de marques.
 Pour cela, créer d'abord une vue qui "nomme", le résultat de la requête de la question précédente , puis écrire une requête dont l'entete des colonnes du resultat est :
 - classe
 - NB
